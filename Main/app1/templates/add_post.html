@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Добавление поста</title>
+ <style>
+  body {
+   font-family: Arial, sans-serif;
+   background-color: #f2f2f2;
+  }
+  h1 {
+   text-align: center;
+   margin-top: 50px;
+   color: #333;
+  }
+  form {
+   margin: 50px auto;
+   width: 80%;
+   background-color: #fff;
+   padding: 20px;
+   box-shadow: 0px 0px 10px #ccc;
+  }
+  label {
+   display: block;
+   margin-bottom: 10px;
+   color: #666;
+  }
+  input[type="text"], textarea {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   margin-bottom: 20px;
+  }
+  button[type="submit"] {
+   padding: 10px 20px;
+   background-color: #333;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+  }
+  button[type="submit"]:hover {
+   background-color: #555;
+  }
+ </style>
+</head>
+<body>
+ <h1>Добавление поста</h1>
+ <form method="post">
+     {% csrf_token %}
+     <label for="title">Заголовок:</label>
+     {{ form.title }}
+     <label for="content">Содержание:</label>
+     {{ form.content }}
+     <label for="author">Автор:</label>
+     {{ form.author }}
+     <label for="date">Дата:</label>
+     {{ form.date }}
+     <button type="submit">Добавить пост</button>
+ </form>
+</body>
+</html>

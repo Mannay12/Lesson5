@@ -37,23 +37,21 @@
  </style>
 </head>
 <body>
- {% block content %}
-  <h1>Мои посты</h1>
-  {% if posts %}
-    <ul>
-      {% for post in posts %}
-        <li>
-          <h3>{{ post.title }}</h3>
-          <p>{{ post.content }}</p>
-          <p>{{ post.created_at }}</p>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Вы не опубликовали ни одного поста.</p>
-  {% endif %}
-{% endblock %}
-
+    {% block content %}
+      <h1>Мои посты</h1>
+      {% if posts %}
+        <ul>
+          {% for post in posts %}
+            <li>
+              <h3>{{ post.title }}</h3>
+              <p>{{ post.content }}</p>
+              <p>{{ post.created_at }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Вы не опубликовали ни одного поста.</p>
+      {% endif %}
+    {% endblock %}
 </body>
 </html>

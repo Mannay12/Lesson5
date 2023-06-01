@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registration Page</title>
+    <title>Войти</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
         body {
@@ -10,10 +10,14 @@
         }
         .card {
             width: 400px;
-            margin: 50px auto;
+            margin: 40px auto;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         .card-title {
             font-size: 2rem;
@@ -48,10 +52,9 @@
 </head>
 <body>
     <div class="card">
-        <div class="card-title">Регистрация</div>
+        <div class="card-title">Войти</div>
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
             <div class="input-field">
                 <input name="username" type="text" id="username" required>
                 <label for="username">Имя пользователя</label>
@@ -60,7 +63,10 @@
                 <input name="password" type="password" id="password" required>
                 <label for="password">Пароль</label>
             </div>
-            <button type="submit" class="btn">Зарегестрироваться</button>
+            <button type="submit" class="btn">Войти</button>
+            <div class="col-md-3 text-end">
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'registration' %}">Регистрация</a>
+            </div>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

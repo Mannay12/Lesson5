@@ -1,0 +1,27 @@
+{% extends 'app1/home.html' %}
+
+{% block content %}
+  {% for post in posts %}
+    <div class="post-container">
+      <h1 class="post-title">{{ post.title }}</h1>
+      <p class="post-date">{{ post.created_at|date:"d-m-Y H:i" }}</p>
+      {% if post.image %}
+      <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+      {% else %}
+        <p></p>
+      {% endif %}
+      <div class="post-content">{{ post.content|linebreaks }}</div>
+      <div class="post-actions">
+        <a href="{% url 'edit_post' post_id=post.id %}" class="btn btn-primary">Редактировать</a>
+        <form method="POST" class="delete-form">
+          {% csrf_token %}
+          <input type="hidden" name="post_id" value="{{ post.id }}">
+          <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+      </div>
+    </div>
+  {% empty %}
+    <p><h1 class="post-title">Вы не опубликовали ни одного поста.</h1></p>
+  {% endfor %}
+
+{% endblock %}

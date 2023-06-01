@@ -1,0 +1,48 @@
+{% extends 'app1/home.html' %}
+
+{% block content %}
+<div class="post-container">
+  <h1 class="post-title">{{ post.title }}</h1>
+  <p class="post-date">{{ post.created_at }}</p>
+      {% if post.image %}
+      <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+      {% else %}
+        <p></p>
+      {% endif %}
+  <div class="post-content">{{ post.content|linebreaks }}</div>
+    <p>Количество лайков: {{ post.like_set.count }}</p>
+  <form method="POST" action="{% url 'like' post.slug %}">
+    {% csrf_token %}
+<!--    <input type="submit" value="Лайк">-->
+    <button class="like-button">
+    <i class="fas fa-heart"></i>
+      <span>Like</span>
+    </button>
+  </form>
+    <h2>Комментарии:</h2>
+      {% for comment in comments %}
+        <div class="comment">
+          <p class="info">
+            {{ comment.created_at }} <a href="{% url 'view_profile'  comment.author.username %}"> {{ comment.author }}</a><br>
+          </p>
+          <p>{{ comment.content }}</p>
+      {% if request.user == comment.author %}
+          <p class="edit-link"><a href="{% url 'edit_comment' post.slug comment.id %}">Редактировать</a></p>
+      <form method="post" action="{% url 'comment_delete' post.slug comment.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Удалить комментарий">
+      </form>
+    {% endif %}
+        </div>
+      {% empty %}
+        <p>Нет комментариев</p>
+      {% endfor %}
+      <hr>
+      <h2>Оставить комментарий:</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+      </form>
+</div>
+{% endblock %}

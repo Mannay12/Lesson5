@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Имя пользователя</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
         body {
@@ -10,10 +10,14 @@
         }
         .card {
             width: 400px;
-            margin: 50px auto;
+            margin: 40px auto;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         .card-title {
             font-size: 2rem;
@@ -48,22 +52,8 @@
 </head>
 <body>
     <div class="card">
-        <div class="card-title">Вход в аккаунт</div>
-        <form method="post">
-            {% csrf_token %}
-            <div class="input-field">
-                <input name="username" type="text" id="username" required>
-                <label for="username">Имя пользователя</label>
-            </div>
-            <div class="input-field">
-                <input name="password" type="password" id="password" required>
-                <label for="password">Пароль</label>
-            </div>
-            <button type="submit" class="btn">Войти</button>
-        </form>
-        <form method="get" action="/app1/registration/">
-            <button type="submit" class="btn">Регистрация</button>
-        </form>
+        <div class="card-title">Добро пожаловать!<br> Вы вошли как: {{ user.username }}</div>
+		<a class="btn" href="{% url 'home' %}">Продолжить</a>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>

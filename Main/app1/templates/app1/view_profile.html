@@ -1,0 +1,33 @@
+{% extends 'app1/home.html' %}
+
+{% block content %}
+    <div class="post-container">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user_form.instance.username }}</h2>
+          <p class="text-secondary">{{ user_form.instance.last_name }} {{ user_form.instance.first_name }}</p>
+          <p class="text-secondary">{{ user_form.instance.email }}</p>
+          <p class="text-secondary">{{ profile_form.instance.bio }}</p>
+          <p class="text-secondary">{{ profile_form.instance.location }}</p>
+          <p class="text-secondary">{{ profile_form.instance.birth_date }}</p>
+        </div>
+      </div>
+    </div>
+          {% for post in posts %}
+        <div class="post-container">
+          <p><h3 class="post-title" >Посты пользователя</h3></p>
+          <h4 class="post-title">{{ post.title }}</h4>
+          <p class="post-date">{{ post.created_at|date:"d-m-Y H:i" }}</p>
+          {% if post.image %}
+          <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+          {% else %}
+            <p></p>
+          {% endif %}
+          <div class="post-content">{{ post.content|linebreaks|truncatewords:50 }}</div>
+          <p><a href="{{ post.get_absolute_url }}">Читать пост</a></p>
+        </div>
+        {% empty %}
+          <p><h4 class="post-title">Вы не опубликовали ни одного поста.</h4></p>
+        {% endfor %}
+{% endblock %}

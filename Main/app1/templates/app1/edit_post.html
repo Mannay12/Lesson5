@@ -1,0 +1,12 @@
+{% extends 'app1/home.html' %}
+
+{% block content %}
+<div class="post-container">
+    <h2>Редактирование поста</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить изменения</button>
+    </form>
+</div>
+{% endblock %}
